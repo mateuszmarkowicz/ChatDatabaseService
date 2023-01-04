@@ -40,7 +40,7 @@ public class UserController {
         //WAZNE - pobieranie nazwy uzytkownika
         Object user2 = SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        System.out.println(user2);
+        //System.out.println(user2);
         return "Test2";
     }
 

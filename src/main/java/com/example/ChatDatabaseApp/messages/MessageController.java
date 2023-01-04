@@ -34,4 +34,12 @@ public class MessageController {
         }
     }
 
+    @GetMapping("/friends")
+    public List<String> getFriends(){
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = user.toString();
+        return messageRepository.getFriends(username);
+    }
+
 }

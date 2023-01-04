@@ -24,4 +24,9 @@ public class MessageRepository {
         }
         return true;
     }
+
+    public List<String> getFriends(String username) {
+        return  jdbcTemplate.queryForList("SELECT DISTINCT receiver from messages where sender=?" +
+                "UNION select distinct sender from messages where receiver=?", String.class, username, username);
+    }
 }
