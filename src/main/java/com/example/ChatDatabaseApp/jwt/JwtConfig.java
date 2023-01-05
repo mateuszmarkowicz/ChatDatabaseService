@@ -15,7 +15,6 @@ public class JwtConfig {
     public JwtConfig() {
     }
 
-
     public String getAuthorizationHeader(){
         return HttpHeaders.AUTHORIZATION;
     }

@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 public class ChatDatabaseAppApplication {
 
 	public static void main(String[] args) {
-
 		ApplicationContext con =  SpringApplication.run(ChatDatabaseAppApplication.class, args);
 	}
 

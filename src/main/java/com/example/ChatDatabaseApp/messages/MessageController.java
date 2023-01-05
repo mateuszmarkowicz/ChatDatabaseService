@@ -11,10 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/messages")
 public class MessageController {
-
     @Autowired
     MessageRepository messageRepository;
-
     @GetMapping("")
     public List<Message> getMessages(@RequestParam String username){
         Object user1 = SecurityContextHolder.getContext().getAuthentication()
@@ -22,7 +20,6 @@ public class MessageController {
         String username2 = user1.toString();
         return messageRepository.getMessages(username, username2);
     }
-
     @PostMapping("")
     public boolean sendMessage(@RequestBody Message message){
         boolean isMessageSend = messageRepository.sendMessage(message);
@@ -33,7 +30,6 @@ public class MessageController {
             return false;
         }
     }
-
     @GetMapping("/friends")
     public List<String> getFriends(){
         Object user = SecurityContextHolder.getContext().getAuthentication()
@@ -41,5 +37,4 @@ public class MessageController {
         String username = user.toString();
         return messageRepository.getFriends(username);
     }
-
 }

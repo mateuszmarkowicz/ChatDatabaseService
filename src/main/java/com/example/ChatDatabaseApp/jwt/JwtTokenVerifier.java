@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class JwtTokenVerifier extends OncePerRequestFilter {
-
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
 
@@ -31,7 +30,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
     }
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -66,15 +64,12 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     username,
                     null,
                     simpleGrantedAuthorities
-
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         }catch (JwtException e){
             throw new IllegalStateException(String.format("Token %s cannot be truest", token));
         }
-
         filterChain.doFilter(request, response);
-
     }
 }

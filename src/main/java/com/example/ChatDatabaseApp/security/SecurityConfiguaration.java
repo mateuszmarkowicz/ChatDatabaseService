@@ -21,14 +21,11 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
-
     private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
-
     @Autowired
     DataSource dataSource;
-
     @Autowired
     public SecurityConfiguaration(PasswordEncoder passwordEncoder,
                                      SecretKey secretKey,
@@ -37,8 +34,6 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
     }
-
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
@@ -46,7 +41,6 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
 
     }
-
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
@@ -61,17 +55,5 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest()
                 .authenticated();
-
-
-
-
-
-
     }
-
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder(){
-//        return passwordEncoder;
-//    }
-
 }

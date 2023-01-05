@@ -16,7 +16,6 @@ public class UserRepository {
     JdbcTemplate jdbcTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     public boolean validateLogData(User user){
             return true;
     }
@@ -26,8 +25,6 @@ public class UserRepository {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             int insertUser =  jdbcTemplate.update("INSERT INTO users(username, password, enabled) VALUES(?,?,?)", user.getUsername(), user.getPassword(), 1);
             int insertAuth = jdbcTemplate.update("INSERT INTO authorities(username, authority) VALUES(?,?)", user.getUsername(),"ROLE_USER");
-
-
         }catch (Exception e){
             return false;
         }

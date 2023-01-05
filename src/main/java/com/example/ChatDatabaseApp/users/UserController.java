@@ -14,10 +14,8 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
     UserRepository userRepository;
-
     @PostMapping("")
     public boolean register(@RequestBody User user, HttpServletResponse response){
         boolean isRegisterDone = userRepository.register(user);
@@ -43,12 +41,4 @@ public class UserController {
         //System.out.println(user2);
         return "Test2";
     }
-
-//    @RequestMapping(value = "/name", method = RequestMethod.GET)
-//    public String getName(Authentication authentication, Principal principal) {
-//        System.out.println(authentication.getName());
-//        System.out.println("-----------------");
-//        System.out.println(principal.getName());
-//        return "";
-//    }
 }

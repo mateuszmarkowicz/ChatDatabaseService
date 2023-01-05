@@ -15,7 +15,6 @@ public class MessageRepository {
         return jdbcTemplate.query("SELECT id, sender, receiver, post_date, content from messages WHERE " +
                 "(sender LIKE ? AND receiver LIKE ?) OR (receiver LIKE ? AND sender LIKE ?) ORDER BY post_date ASC", BeanPropertyRowMapper.newInstance(Message.class), username, username2, username, username2);
     }
-
     public boolean sendMessage(Message message) {
         try {
             int insertUser =  jdbcTemplate.update("INSERT INTO messages(sender, receiver, content) VALUES(?,?,?)", message.getSender(), message.getReceiver(), message.getContent());
@@ -24,7 +23,6 @@ public class MessageRepository {
         }
         return true;
     }
-
     public List<String> getFriends(String username) {
         return  jdbcTemplate.queryForList("SELECT DISTINCT receiver from messages where sender=?" +
                 "UNION select distinct sender from messages where receiver=?", String.class, username, username);

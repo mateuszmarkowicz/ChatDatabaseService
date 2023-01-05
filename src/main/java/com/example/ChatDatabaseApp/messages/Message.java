@@ -13,5 +13,4 @@ public class Message {
     private String receiver;
     private String post_date;
     private String content;
-
 }
