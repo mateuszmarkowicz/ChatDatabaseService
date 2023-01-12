@@ -30,4 +30,13 @@ public class UserRepository {
         }
         return true;
     }
+
+    public boolean changeStatus(String username, boolean isOnline) {
+        try{
+                jdbcTemplate.update("UPDATE users SET isOnline=? WHERE username=?", isOnline, username);
+        }catch (Exception e){
+        return false;
+    }
+        return true;
+    }
 }

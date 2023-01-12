@@ -27,18 +27,9 @@ public class UserController {
             return false;
         }
     }
-
-    @GetMapping("test")
-    public String userTest() {
-        return "Test";
-    }
-
-    @GetMapping("test2")
-    public String userTest2() {
-        //WAZNE - pobieranie nazwy uzytkownika
-        Object user2 = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        //System.out.println(user2);
-        return "Test2";
+    @PatchMapping("/{isOnline}")
+    public void changeStatus(@PathVariable boolean isOnline){
+    Object user = SecurityContextHolder.getContext().getAuthentication();
+    userRepository.changeStatus(user.toString(), isOnline);
     }
 }
