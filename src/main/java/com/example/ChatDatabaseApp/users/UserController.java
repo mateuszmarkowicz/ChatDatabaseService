@@ -28,8 +28,9 @@ public class UserController {
         }
     }
     @PatchMapping("/{isOnline}")
-    public void changeStatus(@PathVariable boolean isOnline){
-    Object user = SecurityContextHolder.getContext().getAuthentication();
-    userRepository.changeStatus(user.toString(), isOnline);
+    public boolean changeStatus(@PathVariable boolean isOnline){
+    Object user = SecurityContextHolder.getContext().getAuthentication()
+            .getPrincipal();
+    return userRepository.changeStatus(user.toString(), isOnline);
     }
 }

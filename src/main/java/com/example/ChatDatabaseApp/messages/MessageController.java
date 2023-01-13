@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.Receiver;
 import java.util.List;
 
 @RestController
@@ -31,10 +32,18 @@ public class MessageController {
         }
     }
     @GetMapping("/friends")
-    public List<String> getFriends(){
+    public List<Friend> getFriends(){
         Object user = SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String username = user.toString();
         return messageRepository.getFriends(username);
+    }
+
+    @PatchMapping("/{senderUsername}")
+    public boolean changeStatus(@PathVariable String senderUsername){
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String receiverUsername = user.toString();
+        return messageRepository.changeStatus(receiverUsername, senderUsername);
     }
 }
