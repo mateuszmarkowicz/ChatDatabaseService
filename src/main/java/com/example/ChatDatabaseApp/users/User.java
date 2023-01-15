@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    //klasa odzwierciedlajaca podstatwowe dane uzytkownika(rejestracja)
     private String username;
     private String password;
     private int enabled;

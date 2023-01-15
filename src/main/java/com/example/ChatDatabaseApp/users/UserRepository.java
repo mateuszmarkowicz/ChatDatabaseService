@@ -16,12 +16,10 @@ public class UserRepository {
     JdbcTemplate jdbcTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public boolean validateLogData(User user){
-            return true;
-    }
-
+    //funcja dodajaca uzytkownika do bazy
     public boolean register(User user) throws DataIntegrityViolationException{
         try {
+            //haszowanie hasla uzytkownika
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             int insertUser =  jdbcTemplate.update("INSERT INTO users(username, password, enabled) VALUES(?,?,?)", user.getUsername(), user.getPassword(), 1);
             int insertAuth = jdbcTemplate.update("INSERT INTO authorities(username, authority) VALUES(?,?)", user.getUsername(),"ROLE_USER");
@@ -30,7 +28,7 @@ public class UserRepository {
         }
         return true;
     }
-
+    //funkcja zmieniajaca status aktywnosci uzytkownika
     public boolean changeStatus(String username, boolean isOnline) {
         try{
                 jdbcTemplate.update("UPDATE users SET is_online=? WHERE username=?", isOnline, username);

@@ -34,6 +34,8 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
     }
+    //funkcja ustawiajaca jaka baze danych oraz funkcje haszujaca
+    //uzyc do autoryzacji uzytkownika
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
@@ -41,6 +43,8 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
 
     }
+    //glowna funcja odpowiedzialna za zabezpieczenie endpointow przed niezalogowanymi uzytkownikami
+    //ustawia  ona rowniez klasy(filtry) przez ktore zapytanie musi przejsc aby zostac zautoryzowane
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
@@ -49,10 +53,9 @@ public class SecurityConfiguaration  extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("index", "/users/test").permitAll()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/users/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/users/**", "messages/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest()
                 .authenticated();
     }

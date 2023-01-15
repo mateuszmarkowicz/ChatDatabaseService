@@ -31,6 +31,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         this.jwtConfig = jwtConfig;
     }
 
+    //funkcja sprawdzajaca czy token przeslanie w naglowkach zapytania jest poprawny
+    //i czy na jego podstawie mozna zautoryzowac uzytkownika
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

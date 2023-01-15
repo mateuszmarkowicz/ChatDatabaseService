@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
+    //klasa odzwierciedlajaca dane wiadomosci
     int id;
     private String sender;
     private String receiver;

@@ -14,7 +14,7 @@ public class JwtSecretKey {
     public JwtSecretKey(JwtConfig jwtConfig) {
         this.jwtConfig = jwtConfig;
     }
-
+    //bean bedacy sekretnym kluczem uzywanym do sprawdza poprawnosci tokena
     @Bean
     public SecretKey secretKey(){
         return Keys.hmacShaKeyFor(jwtConfig.getSecretKey().getBytes());

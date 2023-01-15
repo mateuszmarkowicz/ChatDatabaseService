@@ -29,7 +29,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
     }
-
+    //funkcja przeprowadzajaca probe autoryzacji uzytkownika
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
@@ -45,6 +45,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         }
     }
 
+    //funcja tworzaca i zwracajaca w naglowku token po pomyslniej autoryzacji uzytkownika
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,

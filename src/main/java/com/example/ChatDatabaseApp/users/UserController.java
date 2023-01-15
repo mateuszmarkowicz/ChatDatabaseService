@@ -16,6 +16,8 @@ import java.security.Principal;
 public class UserController {
     @Autowired
     UserRepository userRepository;
+
+    //endpoint umozliwiajacy rejestracje nowego uzytkownika
     @PostMapping("")
     public boolean register(@RequestBody User user, HttpServletResponse response){
         boolean isRegisterDone = userRepository.register(user);
@@ -23,12 +25,15 @@ public class UserController {
             return true;
         }
         else {
+            //jesli cos poszlo nie tak ustaw status 409
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             return false;
         }
     }
+    //endpoint sluzocy do zmiany statusu aktywnosci uzytkownika(online/offline)
     @PatchMapping("/{isOnline}")
     public boolean changeStatus(@PathVariable boolean isOnline){
+    //pobranie nazwy uzytkownika z tokenu
     Object user = SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal();
     return userRepository.changeStatus(user.toString(), isOnline);
