@@ -39,8 +39,8 @@ public class MessageRepository {
             }
         }
         return friends;
-
     }
+
     //funkcja zmienajaca status nieprzeczytanych wiadomosci z danym uzytkownikem na przeczytane
     public boolean changeStatus(String receiverUsername, String senderUsername) {
         try {

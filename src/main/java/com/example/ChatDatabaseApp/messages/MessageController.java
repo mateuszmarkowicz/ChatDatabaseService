@@ -30,7 +30,7 @@ public class MessageController {
             return true;
         }
         else {
-            //jesli cos poszlo nie tak ustaw status 409
+            //jesli cos poszlo nie tak ustaw status 406
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             return false;
         }
